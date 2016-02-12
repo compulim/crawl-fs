@@ -29,5 +29,8 @@
   },
   "devDependencies": {
     "mocha": "^2.4.5"
-  }
+  },
+  "scripts": {
+    "test": "mocha"
+  },
 }
