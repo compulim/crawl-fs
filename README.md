@@ -1,18 +1,20 @@
 # crawl-fs [![Build Status](https://travis-ci.org/compulim/crawl-fs.svg?branch=master)](https://travis-ci.org/compulim/crawl-fs)
 
-Recursively crawl a folder and returns a list of relative filenames.
+Recursively crawls a folder and returns a list of relative filenames.
 
 ## Usage
 
-The following examples assume the folder structure looks like this:
+There are few ways to use `crawl-fs`. Following examples assume the folder structure looks like this:
 ```
 ./folder-to-crawl/abc.txt
+./folder-to-crawl/def/
 ./folder-to-crawl/def/ghi.txt
+./folder-to-crawl/xyz/
 ```
 
-There are few ways to use `crawl-fs`.
+We only returns files, empty folders are not included in result. Filenames are always relative to the base path, which relative to `process.cwd()`, specified in the function call.
 
-### Returns an array
+### Default returns an array
 
 ```javascript
 require('crawl-fs')('folder-to-crawl/', (err, filenames) => {
@@ -26,7 +28,7 @@ require('crawl-fs')('folder-to-crawl/', (err, filenames) => {
 });
 ```
 
-### Returns a Promise with iterator callback
+### Returns a Promise with an iterator
 
 ```javascript
 require('crawl-fs').withIterator('folder-to-crawl/', filename => {
