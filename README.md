@@ -1,6 +1,6 @@
 # crawl-fs [![Build Status](https://travis-ci.org/compulim/crawl-fs.svg?branch=master)](https://travis-ci.org/compulim/crawl-fs)
 
-Recursively crawls a folder and returns a list of relative filenames.
+Recursively crawls a folder and returns a list of relative filenames. Iteration is flat and do not use recursive function.
 
 ## Usage
 
@@ -30,15 +30,22 @@ require('crawl-fs')('folder-to-crawl/', (err, filenames) => {
 
 ### Returns a Promise with an iterator
 
-```javascript
-require('crawl-fs').withIterator('folder-to-crawl/', filename => {
-  // On first call
-  assert.equal(filename, 'abc.txt');
+If applicable, this approach is preferred as it is progressive and requires less memory.
 
-  // On second call
-  assert.equal(filename, 'def/ghi.txt');
+```javascript
+let numCalled = 0;
+
+require('crawl-fs').withIterator('folder-to-crawl/', filename => {
+  // First iteration
+  numCalled === 0 && assert.equal(filename, 'abc.txt');
+
+  // Second iteration
+  numCalled === 1 && assert.equal(filename, 'def/ghi.txt');
+
+  numCalled++;
 }).then(() => {
-  // Done
+  // Completion
+  assert.equal(numCalled, 2);
 });
 ```
 
@@ -53,7 +60,7 @@ If you think these design considerations are not valid, please [challenge](https
 * 0.0.1 (2016-02-13) - Initial commit
 
 ## Wishlist
-[ ] When async generator is official in ES7, we should add new `.withAsyncGenerator()` function
+* [ ] When async generator is official in ES7, we should add new `.withAsyncGenerator()` function
 
 ## Contribution
 

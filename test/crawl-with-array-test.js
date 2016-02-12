@@ -1,3 +1,5 @@
+'use strict';
+
 const
   assert = require('assert'),
   async = require('async'),
@@ -15,7 +17,7 @@ describe('Crawl with array', () => {
           result,
           [
             'abc.txt',
-            'def' + path.sep + 'ghi.txt'
+            `def${path.sep}ghi.txt`
           ]
         );
 

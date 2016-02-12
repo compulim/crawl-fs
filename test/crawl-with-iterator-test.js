@@ -1,3 +1,5 @@
+'use strict';
+
 const
   assert = require('assert'),
   async = require('async'),
@@ -22,18 +24,16 @@ function runAsPromise(path, options) {
 describe('Crawl with iterator', () => {
   describe('crawlWithIterator() on non-empty folder', () => {
     it('should iterates over files', done => {
-      runAsPromise(path.resolve(basePath, 'non-empty/'))
-        .then(result => {
-          assert.deepEqual(
-            result,
-            [
-              'abc.txt',
-              'def' + path.sep + 'ghi.txt'
-            ]
-          );
+      let numCalled = 0;
 
-          done();
-        });
+      crawlfs.withIterator(path.resolve(basePath, 'non-empty/'), filename => {
+        numCalled === 0 && assert.equal(filename, 'abc.txt');
+        numCalled === 1 && assert.equal(filename, `def${path.sep}ghi.txt`);
+        numCalled++;
+      }).then(() => {
+        assert.equal(numCalled, 2);
+        done();
+      });
     });
   });
 
