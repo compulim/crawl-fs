@@ -1,4 +1,4 @@
-# crawl-fs
+# crawl-fs [![Build Status](https://travis-ci.org/compulim/crawl-fs.svg?branch=master)](https://travis-ci.org/compulim/crawl-fs)
 
 Recursively crawl a folder and returns a list of relative filenames.
 
