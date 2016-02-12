@@ -1,0 +1,33 @@
+{
+  "name": "crawl-fs",
+  "description": "Recursively crawl the content of a folder",
+  "contributors": [
+    {
+      "name": "William Wong",
+      "email": "compulim@hotmail.com"
+    }
+  ],
+  "version": "0.0.1",
+  "main": "index.js",
+  "keywords": [
+    "crawl"
+  ],
+  "homepage": "https://github.com/compulim/crawl-fs/",
+  "bugs": {
+    "url": "https://github.com/compulim/crawl-fs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/compulim/crawl-fs.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=4.x"
+  },
+  "dependencies": {
+    "async": "^1.5.2"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  }
+}
