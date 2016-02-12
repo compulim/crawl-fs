@@ -3,12 +3,13 @@ const
   async = require('async'),
   crawlfs = require('../index'),
   fs = require('fs'),
-  path = require('path');
+  path = require('path'),
+  basePath = path.resolve(module.filename, '../crawl-with-array-test-files/');
 
-describe('Crawl as array', () => {
-  describe('crawlAsArray() on non-empty folder', () => {
+describe('Crawl with array', () => {
+  describe('crawlWithArray() on non-empty folder', () => {
     it('should returns an array of files', done => {
-      crawlfs(path.resolve(module.filename, '../1-crawl-test-files/non-empty/'), (err, result) => {
+      crawlfs(path.resolve(basePath, 'non-empty/'), (err, result) => {
         assert(!err);
         assert.deepEqual(
           result,
@@ -23,9 +24,9 @@ describe('Crawl as array', () => {
     });
   });
 
-  describe('crawlAsArray() on empty folder', () => {
+  describe('crawlWithArray() on empty folder', () => {
     it('should returns an empty array', done => {
-      const targetPath = path.resolve(module.filename, '../1-crawl-test-files/empty/');
+      const targetPath = path.resolve(basePath, 'empty/');
 
       fs.mkdir(targetPath, err => {
         assert(!err || err.code === 'EEXIST');
@@ -40,9 +41,9 @@ describe('Crawl as array', () => {
     });
   });
 
-  describe('crawlAsArray() on folder with only subfolders', () => {
+  describe('crawlWithArray() on folder with only subfolders', () => {
     it('should returns an empty array', done => {
-      const targetPath = path.resolve(module.filename, '../1-crawl-test-files/only-folders/');
+      const targetPath = path.resolve(basePath, 'only-folders/');
 
       fs.mkdir(targetPath, err => {
         assert(!err || err.code === 'EEXIST');
@@ -61,9 +62,9 @@ describe('Crawl as array', () => {
     });
   });
 
-  describe('crawlAsArray() on non-existent folder', () => {
+  describe('crawlWithArray() on non-existent folder', () => {
     it('should throws ENOENT', done => {
-      crawlfs(path.resolve(module.filename, '../1-crawl-test-files/non-existent/'), err => {
+      crawlfs(path.resolve(basePath, 'non-existent/'), err => {
         assert(err && err.code === 'ENOENT');
         done();
       });
